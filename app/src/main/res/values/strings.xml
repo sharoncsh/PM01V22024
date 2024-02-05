@@ -4,4 +4,6 @@
     <string name="apellido">Ingrese su Apellido</string>
     <string name="telefono">Ingrese su Telefono</string>
     <string name="btn_procesar">Procesar</string>
+    <string name="edad">Ingrese su Edad</string>
+    <string name="correo">Ingrese su Correo</string>
 </resources>

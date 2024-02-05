@@ -15,7 +15,7 @@ import configuracion.Transacciones;
 
 public class  MainActivity extends AppCompatActivity {
     /*declaracion de las variables globales*/
-    EditText nombres,apellidos,telefono;
+    EditText nombres,apellidos,edad, correo;
     Button btnproceso;
 
     @Override
@@ -27,7 +27,8 @@ public class  MainActivity extends AppCompatActivity {
 
         nombres = (EditText) findViewById(R.id.nombres);
         apellidos = (EditText) findViewById(R.id.apellidos);
-        telefono = (EditText) findViewById(R.id.telefono);
+        edad = (EditText) findViewById(R.id.edad);
+        correo = (EditText) findViewById(R.id.correo);
         btnproceso = (Button) findViewById(R.id.btnprocesar);
 
         btnproceso.setOnClickListener(new View.OnClickListener(){
@@ -42,10 +43,21 @@ public class  MainActivity extends AppCompatActivity {
 
     private void AddPerson()
     {
-        SQLiteConexion conexion = new SQLiteConexion( this, Transacciones.DBName, null, 1);
+        SQLiteConexion conexion = new SQLiteConexion( this, Transacciones.BDName, null, 1);
         SQLiteDatabase db = conexion.getWritableDatabase();
 
         ContentValues valores = new ContentValues();
-        valores.put(Transacciones.nombres, nombre.getText().toString());
+        valores.put(Transacciones.nombres, nombres.getText().toString());
+        valores.put(Transacciones.apellidos, apellidos.getText().toString());
+        valores.put(Transacciones.edad, edad.getText().toString());
+        valores.put(Transacciones.correo, correo.getText().toString());
+
+        Long resultado = db.insert(Transacciones.TablePersonas, Transacciones.id, valores);
+
+        Toast.makeText(getApplicationContext(), "Registro Ingresado con Exito " + resultado.toString(),
+                Toast.LENGTH_LONG).show();
+
+        db.close();
+
     }
 }
